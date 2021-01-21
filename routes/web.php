@@ -25,3 +25,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// trayendo los productos del gerente de la pagina
+Route::get('/mis_articulos', [App\Http\Controllers\gerenteProductos::class, 'articulos_gerente'])->name('mostrar_datos');
+
+Route::post('/consulta', [App\Http\Controllers\gerenteProductos::class, 'buscar_productos'])->name('mostrar_datos');

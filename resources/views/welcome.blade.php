@@ -21,7 +21,7 @@
             
 
 
-         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler menu-navegacion" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -55,15 +55,14 @@
         <a class="nav-link" id="articulos" href="{{ url('mis_articulos') }}" >Mis productos</a>
       </li>
       @endif
-
-      
-      
       @endisset
+
       @empty(Auth::user()->name)
       <li class="nav-item">
-        <a class="nav-link" id="articulos" href="{{ url('articulos') }}" >Productos</a>
+        <a class="nav-link" id="articulos" href="{{ url('productos') }}" >Productos</a>
       </li>
       @endempty
+
       <li class="nav-item">
                    @if (Route::has('login'))
                 
@@ -78,20 +77,13 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Cerrar sesion') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
 
-                                    
-
-                                    <form id="logout-form" action="{{ url('/confi') }}" method="POST" class="">
-                                        @csrf
-                                        <input type="text" hidden="" name="nombre" value="{{ Auth::user()->id}}">
-                                        <input type="submit" class="btn-sm btn btn-primary" name="" value="configuracion">
-                                    </form>
 
                                 </div>
                             </li>
@@ -125,11 +117,11 @@
 </nav>
 
       @yield('contenido')
-      <div id="body">
+      <div id="titulo">
 
         <center>
           <h1>Supermarket</h1>
-          <img src="{{ asset('/archivos/productos.jpg') }}">
+          <img src="{{ asset('/archivos/productos.jpg') }}" class="img-fluid" alt="300">
         </center>
       </div>
     </body>
