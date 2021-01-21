@@ -18,7 +18,7 @@
     <tr>
     	@foreach($articulos as $articulo)
       <th scope="row">{{ $articulo['id_productos']}}</th>
-      <td><img src="{{ $articulo['img'] }}" width="100"></td>
+      <td><img src="img/{{ $articulo['img'] }}" width="100"></td>
       <td>{{ $articulo['nombre_producto']}}</td>
       <td>{{ $articulo['descripcion']}}</td>
       <td>{{ $articulo['precio']}}</td>
@@ -26,14 +26,10 @@
       
 
       
-      <td><a  href="#" class="btn-sm btn btn-info"   data-toggle="modal" data-target="#galerias{{$articulo['id']}}"><img src="icons2/camera-fill.svg"></a>
-
-      
-
-      	<a href="#" id="modal" class="galeria btn-sm btn btn-warning"  articulo="{{ $articulo->id }}" ><img src="icons2/card-image.svg"></a>
+      <td>
       
       
-      <button  class="btn-sm btn btn-primary quitar"><img src="icons2/pencil.svg"></button>
+      <button  class="btn-sm btn btn-primary quitar"id="modal"  data-toggle="modal" data-target="#miModal1{{$articulo['id_productos']}}"><img src="icons2/pencil.svg"></button>
       
       
       <form method="POST" style="display: unset;" action="{{ url('/mis_articulos/'.$articulo['id']) }}">
@@ -69,12 +65,52 @@
   </tbody>
 
 </table>
-
+<center> {{ $articulos->links() }}</center><br>
 </div>
 
 
 
 @endif
+@foreach($articulos as $articulo)
+<div class="modal fade" id="miModal1{{$articulo['id_productos']}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog " >
+            <div class="modal-content">
+                <div class="modal-header">
+                     <center><h4 class="modal-title" id="myModalLabel">Registrar articulo nuevo</h4></center>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+        <div class="container-fluid">
+              <form action="{{ url('/actualizar_productos') }}" method="post" enctype="multipart/form-data">
+                @csrf @method('PATCH')
+              <label>Nombre</label> 
+              <input type="text" required="" value="{{ $articulo['nombre_producto'] }}" class="form-control" name="nombre">
+              <label>Descripcion</label>
+              <input type="text" required="" value="{{ $articulo['descripcion']}} "class="form-control" name="descripcion">
+              <label>Precio</label>
+              <input type="text" required="" value="{{ $articulo['precio'] }}"  class="form-control" name="precio">
+              <input type="text" hidden="" required="" value="{{ $articulo['id_productos'] }}"  class="form-control" name="id">
+             
+
+              
+          
+        </div>
+                <div class="modal-footer">
+                
+                     <button type="submit" class=" btn-sm btn btn-primary btn-lg" ><span class="glyphicon glyphicon-remove"></span>Actualizar</button>
+                     
+
+                     <button type="button" class=" btn-sm btn btn-light" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Salir</button>
+
+                  </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+<!-- /.modal editar -->
+
 
 <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog " >
@@ -85,29 +121,34 @@
                 </div>
                 <div class="modal-body">
         <div class="container-fluid">
-          <form action="{{ url('/registro_articulos') }}" method="post" enctype="multipart/form-data">
-          	@csrf
-        	<label>Descripcion</label>
-        	<input type="text" required="" class="form-control" name="descripcion">
-        	<label>Precio</label>
-        	<input type="text" required="" class="form-control" name="precio">
-        	<label>Talla</label>
-        	<input type="text" required=""class="form-control" name="talla">
-        	<label>Imagen del articulo</label>
-        	<input type="file" required="" name="img">
+              <form action="{{ url('/registro_productos') }}" method="post" enctype="multipart/form-data">
+              	@csrf
+              <label>Nombre</label> 
+              <input type="text" required="" class="form-control" name="nombre">
+            	<label>Descripcion</label>
+            	<input type="text" required="" class="form-control" name="descripcion">
+            	<label>Precio</label>
+            	<input type="text" required="" class="form-control" name="precio">
+              <label>Categoria</label>
+
+              <select name="categoria2" class="form-control">
+                <option selected disabled value="">Seleccione categoria</option>
+                <option value="1">Frutas</option>
+                <option value="2">Verduras</option>
+              </select>
+
+            	<label>Imagen del producto</label>
+            	<input type="file" required="" name="img">
         	
-        
         </div>
                 <div class="modal-footer">
                 
-               
+                     <button type="submit" class=" btn-sm btn btn-primary btn-lg" ><span class="glyphicon glyphicon-remove"></span>Registrar</button>
+                     
 
-                 <button type="submit" class=" btn-sm btn btn-primary btn-lg" ><span class="glyphicon glyphicon-remove"></span>Registrar</button>
-                 
+                     <button type="button" class=" btn-sm btn btn-light" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Salir</button>
 
-                 <button type="button" class=" btn-sm btn btn-light" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Salir</button>
-
-                    </div>
+                  </div>
                   </form>
                 </div>
             </div>
@@ -115,69 +156,6 @@
     </div>
 <!-- /.modal registrar -->
 
-@foreach($articulos as $articulo)
-<div class="modal fade" id="galerias{{$articulo->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog " >
-            <div class="modal-content">
-                <div class="modal-header">
-                     <center><h4 class="modal-title" id="myModalLabel">Registrar Galeria de imagenes</h4></center>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-        <div class="container-fluid">
-          <form action="{{ url('/galerias') }}" method="post" enctype="multipart/form-data">
-          	@csrf
-        	<label>Mas imagenes sobre el articulo</label>
-        	<input type="file" required="" name="img">
-        	<input type="text" hidden="" name="id_articulo" value="{{ $articulo['id'] }}" name="">
-        	
-        
-        </div>
-                <div class="modal-footer">
-
-                 <button type="submit" class=" btn-sm btn btn-primary" ><span class="glyphicon glyphicon-remove"></span>Registrar</button>
-                 
-                 <button type="button" class=" btn-sm btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Salir</button>
-
-                    </div>
-                  </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
-<!-- /.modal galeria -->
-
-
-<div class="modal fade" id="gale" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog " >
-            <div class="modal-content">
-                <div class="modal-header">
-                     <center><h4 class="modal-title" id="myModalLabel">Galeria de images</h4></center>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-        <div class="container-fluid">
-           <div id="imagenes" style="text-align: center;" >
-           	<label id="ajax" style="display: none;"></label>
-           	
-
-             
-           </div>
-        	
-        
-        </div>
-                <div class="modal-footer">
-               
-                 <button type="button" class="btn btn-sm btn btn-default " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span><img src="icons2/arrow-left-circle-fill.svg"></button>
-
-                    </div>
-                  </form>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- /.modal mostrar galerias -->
 @endsection
 
 
@@ -288,17 +266,18 @@
  
 
 	
- function buscar(){
-  var categoria=document.getElementById('categoria').value;
-  if(categoria=="")
-  {
-    alert("Selecione una categoria para buscar");
-    return false;
-  }
-  else
-  {
-    return true;
-  }
+ function buscar()
+ {
+        var categoria=document.getElementById('categoria').value;
+        if(categoria=="")
+        {
+          alert("Selecione una categoria para buscar");
+          return false;
+        }
+        else
+        {
+          return true;
+        }
   
  }
 

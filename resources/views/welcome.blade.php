@@ -26,7 +26,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('/archivos/logo2.jpg') }}" width="80" height="80"></a>
+  <img src="{{ asset('/archivos/logo2.jpg') }}" width="80" height="80"></a>
 
 
 
@@ -54,6 +54,40 @@
       <li class="nav-item">
         <a class="nav-link" id="articulos" href="{{ url('mis_articulos') }}" >Mis productos</a>
       </li>
+
+      <li class="nav-item dropdown " >
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{"Zona de distribucion"}}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                  <center><label>Acapulco</label></center>
+                                  @isset($zona)
+                                  @foreach ($zona as $zonas)
+                      
+                    
+                                    <a zonaValor="{{$zonas['id_zona'] }}" class=" zona dropdown-item" href="#">
+                                      {{$zonas['nombre_zona']}}
+                                        
+                                    </a>
+                                    @endforeach
+                                    @endisset
+                                    
+
+                                    <form name="formulario_zona"  action="{{ route('productos_zona') }}" method="POST" class="form d-none">
+                                      <input class="zona1" type="text" name="zona" value="
+
+
+                                      ">
+                                        @csrf
+                                    </form>
+
+                                    
+
+
+                                </div>
+                            </li>
+
       @endif
       @endisset
 
@@ -74,7 +108,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a  class="  dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Cerrar sesion') }}
@@ -126,4 +160,25 @@
       </div>
     </body>
 </html>
+
+
+    <script >
+      
+       $(document).ready(function(){
+               $('.zona').click(function(e){
+                
+                console.log(e);
+                let zonaSolicitada=e.target.innerText;
+                    
+                    $(".zona1").attr("value",zonaSolicitada);
+                    //alert(e.target.innerText);
+                    document.formulario_zona.submit()
+
+                    
+                    
+                    
+                    preventDefault();
+                 })
+         });
+    </script>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\zona;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return View('welcome');
+        $articulo= zona::where('id_zona','>',0)->simplePaginate(15);
+        return view('welcome',['zona' => $articulo]);
+        //return View('welcome');
     }
 
 

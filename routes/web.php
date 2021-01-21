@@ -28,4 +28,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // trayendo los productos del gerente de la pagina
 Route::get('/mis_articulos', [App\Http\Controllers\gerenteProductos::class, 'articulos_gerente'])->name('mostrar_datos');
 
-Route::post('/consulta', [App\Http\Controllers\gerenteProductos::class, 'buscar_productos'])->name('mostrar_datos');
+// trayendo los productos por zona y su stock de esa zona
+Route::post('/productos_zona', [App\Http\Controllers\gerenteProductos::class, 'productos_zona'])->name('productos_zona');
+
+Route::post('/consulta', [App\Http\Controllers\gerenteProductos::class, 'buscar_productos'])->name('');
+//Registro de productos
+Route::post('/registro_productos', [App\Http\Controllers\gerenteProductos::class, 'registro_productos'])->name('registrar_articulos');
+
+//actualizar
+Route::patch('/actualizar_productos', [App\Http\Controllers\gerenteProductos::class, 'actualizar_productos'])->name('actualizar_articulos');
