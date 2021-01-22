@@ -174,11 +174,13 @@
                   @endif
         </li>    
     </ul>
-    <form class="form-inline my-2 my-lg-0" action="{{ url('/consulta') }}" method="POST">
+    @if( Auth::user()->rol==1)
+    <form class="form-inline my-2 my-lg-0" action="{{ url('/consulta2') }}" method="POST">
        @csrf
       <input class="form-control mr-sm-2 " style="border-radius: 40px;" required="" type="search" placeholder="Buscar" aria-label="Search" name="nombre">
       <button class="btn btn-dark my-2 my-sm-0 " style="border-radius: 40px;float: left; display: inline;" type="submit">Buscar <img src="icons2/search.svg"></button>
     </form>
+    @endif
   </div>
 </nav>
 

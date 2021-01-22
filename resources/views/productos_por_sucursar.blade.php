@@ -3,8 +3,10 @@
 @section('contenido')
 
 @if($stock)
-
 @foreach($stock as $stocks)
+@endforeach
+<center><h4>{{ $stocks->nombre_zona  }}</h4></center>
+@foreach($stock as $stocks)<h4>
 
 <div class="articulos">
   <center>

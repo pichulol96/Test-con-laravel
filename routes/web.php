@@ -28,6 +28,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // trayendo los productos del gerente de la pagina
 Route::get('/mis_articulos', [App\Http\Controllers\gerenteProductos::class, 'articulos_gerente'])->name('mostrar_datos');
 
+
+
+
+
 // trayendo los productos por zona y su stock de esa zona
 Route::post('/productos_zona', [App\Http\Controllers\gerenteProductos::class, 'productos_zona'])->name('productos_zona');
 

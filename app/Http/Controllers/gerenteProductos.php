@@ -34,6 +34,8 @@ class gerenteProductos extends Controller
     	//return $articulos;
     }
 
+     
+
     public function productos_zona(Request $request)
     {
         //$zona=request()->except('_token');
