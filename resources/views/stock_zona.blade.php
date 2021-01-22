@@ -30,7 +30,7 @@
       <br>
       <div style="display: flex; margin-left: 10px; padding: 20px;">
       	<center>
-         <h5>{{"Stock de ". $stocks->nombre_categorias ." Del ".$stocks->nombre_zona}} </h5>
+         <h5>{{"Stock de frutas y verduras " ." Del ".$stocks->nombre_zona}} </h5>
       
         </center>
           

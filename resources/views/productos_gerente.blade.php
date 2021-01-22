@@ -121,14 +121,14 @@
                 </div>
                 <div class="modal-body">
         <div class="container-fluid">
-              <form action="{{ url('/registro_productos') }}" method="post" enctype="multipart/form-data">
+              <form onsubmit="return validar()" action="{{ url('/registro_productos') }}" method="post" enctype="multipart/form-data">
               	@csrf
               <label>Nombre</label> 
               <input type="text" required="" class="form-control" name="nombre">
             	<label>Descripcion</label>
-            	<input type="text" required="" class="form-control" name="descripcion">
+            	<input type="text"  required="" class="form-control" name="descripcion">
             	<label>Precio</label>
-            	<input type="text" required="" class="form-control" name="precio">
+            	<input type="text" id="cantidad" required="" class="form-control" name="precio">
               <label>Categoria</label>
 
               <select name="categoria2" class="form-control">
@@ -266,12 +266,12 @@
  
 
 	
- function buscar()
+ function validar()
  {
-        var categoria=document.getElementById('categoria').value;
-        if(categoria=="")
+        var cantidad=document.getElementById('cantidad').value;
+        if(isNaN(cantidad))
         {
-          alert("Selecione una categoria para buscar");
+          alert("EL precio debe ser numerico");
           return false;
         }
         else

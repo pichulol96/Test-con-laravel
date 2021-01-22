@@ -37,3 +37,14 @@ Route::post('/registro_productos', [App\Http\Controllers\gerenteProductos::class
 
 //actualizar
 Route::patch('/actualizar_productos', [App\Http\Controllers\gerenteProductos::class, 'actualizar_productos'])->name('actualizar_articulos');
+
+Route::post('/', [App\Http\Controllers\gerenteProductos::class, 'registro_productos'])->name('registrar_articulos');
+
+Route::post('/compras', [App\Http\Controllers\gerenteProductos::class, 'comprar_articulos'])->name('');
+
+// trayendo los datos de nuevo cuando se quita un articulo del carro de compras
+Route::get('/recargar_articulos', [App\Http\Controllers\gerenteProductos::class, 'recargar_articulos'])->name('');
+///ver carro compras
+Route::get('/compras', [App\Http\Controllers\gerenteProductos::class, 'carro_compras'])->name('');
+//quitar del carrito
+Route::post('/quitar_carro', [App\Http\Controllers\gerenteProductos::class, 'quitar_articulo'])->name('');

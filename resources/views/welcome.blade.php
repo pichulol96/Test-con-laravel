@@ -35,17 +35,49 @@
       
       @isset( Auth::user()->name)
       @if( Auth::user()->rol==1)
-      <li class="nav-item">
-        <a class="nav-link" id="compras" href="{{ url('compras') }}">Compras </a>
-      </li>
+      
 
       <li class="nav-item">
         <input type="text"id="logeado" hidden="" class="logeado" value="{{ Auth::user()->rol }}" name="">
         <a class="nav-link" id="compras" href="{{ url('compras') }}"><img src="icons2/cart-fill.svg"><label id="carrito_total"></label></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="articulos" href="{{ url('articulos') }}" >Articulos</a>
-      </li>
+      
+       @if( Auth::user()->rol==1)
+       <li class="nav-item dropdown " >
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{"Zona de distribucion"}}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                  <center><label>Acapulco</label></center>
+                                  @isset($zona)
+                                  @foreach ($zona as $zonas)
+                      
+                    
+                                    <a zonaValor="{{$zonas['id_zona'] }}" class=" zona dropdown-item" href="#">
+                                      {{$zonas['nombre_zona']}}
+                                        
+                                    </a>
+                                    @endforeach
+                                    @endisset
+                                    
+
+                                    <form name="formulario_zona"  action="{{ route('productos_zona') }}" method="POST" class="form d-none">
+                                      <input class="zona1" type="text" name="zona" value="
+
+
+                                      ">
+                                        @csrf
+                                    </form>
+
+                                    
+
+
+                                </div>
+                            </li>
+       @endif                     
+
+
       @endif
       @if( Auth::user()->rol==2)
       <li class="nav-item">
